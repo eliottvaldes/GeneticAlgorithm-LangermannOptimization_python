@@ -28,6 +28,9 @@ def solve_langermann_function(generations: int = 200) -> dict:
         # save the best individual in a variable use a copy
         best_individual = population[np.argmin(aptitude)].copy()
         
+        # use parent tournament selection
+        population = tournament_selection(population, aptitude)
+        
         # apply sbx crossover
         sbx(population, limits, sbx_prob, sbx_dispersion_param)
         # apply mutation
@@ -57,7 +60,7 @@ def solve_langermann_function(generations: int = 200) -> dict:
 # ===============================================================
 #GENERAL CONFIGURATIONS
 # ===============================================================
-generations = 200 #ng -> Number of generations
+generations = 200 #ng -> Number of generationsb
 population_size = 100 #np -> Size of the population
 variables = 2 #nVar -> Number of variables of each individual
 limits = np.array([[0, 10], #limits var 1 -> [Lower, Upper]
